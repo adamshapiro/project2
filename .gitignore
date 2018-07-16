@@ -1,0 +1,2 @@
+# no need to send dynamically rendered __pycache__ directory
+__pycache__
