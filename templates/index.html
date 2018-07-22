@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-100">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,21 +18,94 @@
 
         <title>Chatterbox</title>
     </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-2">
+    <body class="h-100">
+        <div class="container-fluid h-100">
+            <div class="row h-100">
+                <div class="col-2 bg-secondary">
                     <nav id="sidebar" class="nav nav-pills flex-column">
-                        {% for channel in channel_list %}
-                            <button class="nav-link channel-link" href="#">{{ channel }}</button>
-                        {% endif %}
-                        <button id="addChannel" class="nav-link" data-toggle="modal" data-target="#channelModal"></button>
+                        <h3 class="text-center">Channels</h3>
+                        <button id="addChannel" class="nav-link btn border my-1" data-toggle="modal" data-target="#channelModal">New Channel</button>
                     </nav>
                 </div>
-                <div class="col-10">
-
+                <div class="col h-100 bg-light">
+                    <div class="row h-100">
+                        <div class="col-10">
+                            <div class="row h-100">
+                                <div class="col-12">
+                                    <h2 id="channelName" class="border-bottom border-dark py-2"></h2>
+                                </div>
+                                <div class="col-12 align-self-end pb-3">
+                                    <ul id="chatBox" class="list-group" style="overflow-y:scroll; max-height:80vh"></ul>
+                                    <form id="addMessage" class="mt-3">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="addMessageInput" autocomplete="off" placeholder="Enter Your Message Here">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-success">Send</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="userBox" class="col-2 border-left border-secondary">
+                            <h3 class="text-center">Users</h3>
+                            <ul id="activeUsers" class="list-group"></ul>
+                            <hr>
+                            <h3 class="text-center text-muted">Inactive</h3>
+                            <ul id="inactiveUsers" class="list-group"></ul>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+
+
+        <!-- Username Modal -->
+        <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="userModalLabel">Choose a Username</h5>
+        </div>
+        <div class="modal-body">
+            <div id="userModalAlert" class="alert alert-danger d-none" role="alert">
+                That username is taken!
+            </div>
+            <p>Welcome to Chatterbox! Before starting, please choose a username:</p>
+            <p class="small text-muted">(Note that you cannot change your username after picking one)</p>
+            <input type="text" id="userModalInput" class="form-control" placeholder="Choose a name">
+        </div>
+        <div class="modal-footer">
+            <button type="button" id="userModalSubmit" class="btn btn-primary">Enter</button>
+        </div>
+        </div>
+        </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="channelModal" tabindex="-1" role="dialog" aria-labelledby="channelModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="channelModalLabel">Add a Channel</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div id="channelModalAlert" class="alert alert-danger d-none" role="alert">
+                That channel already exists.
+            </div>
+            <p>Enter the name of your channel:</p>
+            <input type="text" id="channelModalInput" class="form-control" placeholder="Choose a name">
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" id="channelModalSubmit" class="btn btn-primary">Enter</button>
+        </div>
+        </div>
+        </div>
         </div>
     </body>
 </html>
